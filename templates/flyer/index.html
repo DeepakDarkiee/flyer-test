@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
+
+
+  <title>Document</title>
+</head>
+<body>
+
+{% include "flyer/navbar.html" %}
+
+<br>
+<div class="container mt">
+            <form id="create-empty-project-form" method="POST" action="{% url 'create_flyer' %}" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="modal-body">
+                    <div class="form-group row">
+                        <label for="" class="col-sm-3 col-form-label">Nome</label>
+                        <div class="col-sm-3">
+                            <input type="text" class="form-control" name="name" id="name" required autocomplete="off">
+                        </div>
+
+                        <label for="" class="col-sm-3 col-form-label">Formato pagina</label>
+                        <div class="col-sm-3">
+                            <select class="form-control" name="page_format" id="page_format" required autocomplete="off">
+                                {% for format in page_format %}
+                                <option value={{format.id}}>{{format.name}}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="form-group row">
+                        <label for="" class="col-sm-3 col-form-label">Category</label>
+                        <div class="col-sm-3">
+                            <select class="form-control" name="category" id="category">
+                                {% for category in categories %}
+                                <option value={{category.id}}>{{category.name}}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <label for="" class="col-sm-3 col-form-label">Numero di pagine</label>
+                        <div class="col-sm-3">
+                            <input class="form-control" id="number_of_pages" type="number" value="3" name="number_of_pages">
+                  
+                        </div>
+                    </div>
+                    <br>
+                    <div class="form-group row">
+                        <label for="" class="col-sm-3 col-form-label">Formato Stopper</label>
+                        <div class="col-sm-3">
+                            <select class="form-control" name="stopper_format" id="stopper_format">
+                                {% for format in stopper_format %}
+                                <option value={{format.id}}>{{format.name}}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <label for="" class="col-sm-3 col-form-label">Formato Locandina</label>
+                        <div class="col-sm-3">
+                            <select class="form-control" name="poster_format" id="poster_format">
+                                {% for format in poster_format %}
+                                <option value={{format.id}}>{{format.name}}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="form-group row">
+                        <label for="" class="col-sm-3 col-form-label">Numero predefinito di prodotti</label>
+                        <div class="col-sm-3">
+                            <select class="form-control" name="number_of_products" id="number_of_products">
+                                <!-- {% for product in number_of_products %}
+                                <option value={{product.id}}>{{product.name}}</option>  
+                                {% endfor %} -->
+                                <option value='{ "row" :2 , "columns": 1 }'>2x1</option>
+                                <option value='{ "row" :1 , "columns": 2 }'>1x2</option>  
+                                <option value='{ "row" :2 , "columns": 2 }'>2x2</option>  
+                                <option value='{ "row" :3 , "columns": 2 }'>3x2</option>  
+                                <option value='{ "row" :2 , "columns": 3 }'>2x3</option>  
+                                <option value='{ "row" :3 , "columns": 3 }'>3x3</option>  
+                                <option value='{ "row" :3 , "columns": 4 }'>3x4</option>  
+                                <option value='{ "row" :4 , "columns": 3 }'>4x3</option>  
+                                <option value='{ "row" :4 , "columns": 4 }'>4x4</option>  
+                                <option value='{ "row" :4 , "columns": 5 }'>4x5</option>  
+                                <option value='{ "row" :5 , "columns": 4 }'>5x4</option>  
+                                <option value='{ "row" :5 , "columns": 5 }'>5x5</option>  
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" id="create_project" class=" btn btn-primary " value="Create ">Crea</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
